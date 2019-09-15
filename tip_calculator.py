@@ -5,6 +5,19 @@ import random
 
 class NameStuff(object):
         @staticmethod
+        def clear_files():
+                p = open("total_tips.txt", "r+")
+                q = open("tip_scoreboard.txt",'r+')
+                p.seek(0)
+                q.seek(0)
+                p.truncate(0)
+                q.truncate(0)
+                p.close()
+                q.close()
+                return
+                
+        
+        @staticmethod
         def calculate_total_tips(string):
                       output = ""
                       ba = ""
@@ -241,135 +254,121 @@ class NameStuff(object):
          except:
                 return False
                 
-                
-                
-
-        
-
-
-
-                                
-                
-        
-        
-        
-        
-                
-        
-                
-                
-                
-       
-        
-            
-        
-print("////////////////////////////////////////////////////////////////////////")
-print(" Calculations for Tips: Done By Orion")
-print("////////////////////////////////////////////////////////////////////////")
-a = True
-total_tips_slave =""
-new_given = 0.00
-total = 0
-name_array= []
-total_hours = 0
-name_list = []
-hours_list = []
-final_list = []
-number_of_employees=0
-while a == True:
-    try:
-        tips_amount = float(input("What was the number of tips for the day in $ >> "))
-        number_of_employees =  int(input("Enter the number of employees >> "))
-        if number_of_employees !=0:
-                a=False
-
-        NameStuff.show_quickselect()
-        for x in range (0, number_of_employees):
-            employee_name = str(input("Enter Employee Firstname >> ")).strip()
-            employee_name = NameStuff.capital_name(employee_name)
-            if NameStuff.lookfor_int(employee_name)==True:
-                    employee_name = NameStuff.pull_name(int(employee_name))
-            if employee_name not in name_list:
-                    name_list.append(employee_name)
-            hours_worked =input("What is the number of hours that the employee has worked f= full day h = half day l = lunch >> ").strip()
+              
+def Name_body():        
+        print("////////////////////////////////////////////////////////////////////////")
+        print(" Calculations for Tips: Done By Orion")
+        print("////////////////////////////////////////////////////////////////////////")
+        a = True
+        total_tips_slave =""
+        new_given = 0.00
+        total = 0
+        name_array= []
+        total_hours = 0
+        name_list = []
+        hours_list = []
+        final_list = []
+        number_of_employees=0
+        while a == True:
             try:
-                eval_worked = eval(hours_worked)
-            except:
-                    pass
-            if hours_worked == 'F' or hours_worked == 'f':
-                hours_worked = NameStuff.hours_fulltime(str(hours_worked))
-                #print(hours_worked)
-                hours_list.append(hours_worked)
-                total_hours = float(total_hours) + hours_worked
-                #print(total_hours)
-            elif hours_worked == 'h' or hours_worked == 'H':
-                hours_worked = NameStuff.hours_fulltime(str(hours_worked))
-                #print(hours_worked)
-                hours_list.append(hours_worked)
-                #print(hours_list)
-                total_hours = float(total_hours) + hours_worked
-            elif hours_worked == 'l' or hours_worked == 'L':
-                hours_worked = NameStuff.hours_fulltime(str(hours_worked))
-                #print(hours_worked)
-                hours_list.append(hours_worked)
-                #print(hours_list)
-                total_hours = float(total_hours) + hours_worked
-                #print(total_hours)
-            elif type(eval_worked)==float:
-                hours_worked = float(hours_worked)
-                #print(hours_worked)
-                hours_list.append(hours_worked)
-                total_hours = total_hours + hours_worked
-                #print(total_hours)
-            elif type(eval_worked)==int:
-                hours_worked = float(str(hours_worked)+".00")
-                #print(hours_worked)
-                hours_list.append(hours_worked)
-                total_hours = total_hours + hours_worked
-                #print(total_hours)
-            else:
-                print("Error: Please enter a propper value")
-                continue
-                
-                
-                
-    except Exception as e:
-        print(e)
-for x in range (0, (number_of_employees)):
-        #print(total_hours)
-        #print(tips_amount)
-        c = round((hours_list[x]/total_hours)*tips_amount,2)
-        amount_given = NameStuff.round_to(c,0.05)
-        total = float(total) + float(amount_given)
-        NameStuff.add_to_quickselect(str(name_list[x]),str(round(amount_given,2)),"$ in Tips.")
-        output = (str(name_list[x])+ " recieves  $" + str(round(amount_given,2)))
-        final_list.append(output)
-total = round(total,2)
-if total != tips_amount:
-        #print(tips_amount)
-        #print(total)
-        diffrence = tips_amount-total
-        diffrence = round(diffrence,2)
-        pos_add_diffrence = random.randint(0,(number_of_employees-1))
-        edited = final_list.pop(pos_add_diffrence)
-        #print(edited)
-        split_array = edited.split("$")
-        #>> "Eve recieves  $9.0"
-        #split_array[0] = "Eve recives "
-        #split_array[1] = "9.00"
-        new_given = float(split_array[1]) + diffrence
-        d = split_array[0]+"$"+str(round(new_given,2))
-        final_list.append(d)
-for y in range(0, (number_of_employees)):
-        total_tips_slave = total_tips_slave + final_list[y] + ","
-        
-        print(final_list[y])
-print("/////////////////////Total Tips Recived General/////////////////")
-print(NameStuff.calculate_total_tips(total_tips_slave))
-input('Press Any Key To Exit')
+                tips_amount = float(input("What was the number of tips for the day in $ >> "))
+                number_of_employees =  int(input("Enter the number of employees >> "))
+                if number_of_employees !=0:
+                        a=False
 
-
-        
+                NameStuff.show_quickselect()
+                for x in range (0, number_of_employees):
+                    employee_name = str(input("Enter Employee Firstname >> ")).strip()
+                    employee_name = NameStuff.capital_name(employee_name)
+                    if NameStuff.lookfor_int(employee_name)==True:
+                            employee_name = NameStuff.pull_name(int(employee_name))
+                    if employee_name not in name_list:
+                            name_list.append(employee_name)
+                    hours_worked =input("What is the number of hours that the employee has worked f= full day h = half day l = lunch >> ").strip()
+                    try:
+                        eval_worked = eval(hours_worked)
+                    except:
+                            pass
+                    if hours_worked == 'F' or hours_worked == 'f':
+                        hours_worked = NameStuff.hours_fulltime(str(hours_worked))
+                        #print(hours_worked)
+                        hours_list.append(hours_worked)
+                        total_hours = float(total_hours) + hours_worked
+                        #print(total_hours)
+                    elif hours_worked == 'h' or hours_worked == 'H':
+                        hours_worked = NameStuff.hours_fulltime(str(hours_worked))
+                        #print(hours_worked)
+                        hours_list.append(hours_worked)
+                        #print(hours_list)
+                        total_hours = float(total_hours) + hours_worked
+                    elif hours_worked == 'l' or hours_worked == 'L':
+                        hours_worked = NameStuff.hours_fulltime(str(hours_worked))
+                        #print(hours_worked)
+                        hours_list.append(hours_worked)
+                        #print(hours_list)
+                        total_hours = float(total_hours) + hours_worked
+                        #print(total_hours)
+                    elif type(eval_worked)==float:
+                        hours_worked = float(hours_worked)
+                        #print(hours_worked)
+                        hours_list.append(hours_worked)
+                        total_hours = total_hours + hours_worked
+                        #print(total_hours)
+                    elif type(eval_worked)==int:
+                        hours_worked = float(str(hours_worked)+".00")
+                        #print(hours_worked)
+                        hours_list.append(hours_worked)
+                        total_hours = total_hours + hours_worked
+                        #print(total_hours)
+                    else:
+                        print("Error: Please enter a propper value")
+                        continue
+                        
+                        
+                        
+            except Exception as e:
+                print(e)
+        for x in range (0, (number_of_employees)):
+                #print(total_hours)
+                #print(tips_amount)
+                c = round((hours_list[x]/total_hours)*tips_amount,2)
+                amount_given = NameStuff.round_to(c,0.05)
+                total = float(total) + float(amount_given)
+                NameStuff.add_to_quickselect(str(name_list[x]),str(round(amount_given,2)),"$ in Tips.")
+                output = (str(name_list[x])+ " recieves  $" + str(round(amount_given,2)))
+                final_list.append(output)
+        total = round(total,2)
+        if total != tips_amount:
+                #print(tips_amount)
+                #print(total)
+                diffrence = tips_amount-total
+                diffrence = round(diffrence,2)
+                pos_add_diffrence = random.randint(0,(number_of_employees-1))
+                edited = final_list.pop(pos_add_diffrence)
+                #print(edited)
+                split_array = edited.split("$")
+                #>> "Eve recieves  $9.0"
+                #split_array[0] = "Eve recives "
+                #split_array[1] = "9.00"
+                new_given = float(split_array[1]) + diffrence
+                d = split_array[0]+"$"+str(round(new_given,2))
+                final_list.append(d)
+        for y in range(0, (number_of_employees)):
+                total_tips_slave = total_tips_slave + final_list[y] + ","
+                
+                print(final_list[y])
+        print("/////////////////////Total Tips Recived General/////////////////")
+        print(NameStuff.calculate_total_tips(total_tips_slave))
+        endKey = input('Press Any Key To Exit R to restart and C to Clear Lists')
+        if (endKey=="R" or endKey=="r"):
+                Name_body()
+        elif (endKey=="c" or endKey=="C"):
+              NameStuff.clear_files()
+              Name_body()
+                
+        else:
+                pass
+Name_body()
         
         
 
