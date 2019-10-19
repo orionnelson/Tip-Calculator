@@ -1,9 +1,10 @@
 # Calculations For Tips
 import re
 import random
-HOURS_FULLTIME = 8.5
-HOURS_LUNCH = 3.5
-HOURS_HALFDAY = 5.0
+# Assign below the values for Each of the Preset Hours
+HOURS_FULLTIME = 8.5    # Fullday Work symbol = f or F
+HOURS_LUNCH = 3.5       # Lunch Only symbol = l or L
+HOURS_HALFDAY = 5.0     # Halfday From Dinner onward = h or H
 
 
 class NameStuff(object):
