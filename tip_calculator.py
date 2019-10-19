@@ -1,7 +1,10 @@
 # Calculations For Tips
 import re
-import datetime
 import random
+HOURS_FULLTIME = 8.5
+HOURS_LUNCH = 3.5
+HOURS_HALFDAY = 5.0
+
 
 class NameStuff(object):
         @staticmethod
@@ -108,11 +111,11 @@ class NameStuff(object):
         @staticmethod
         def hours_fulltime(this):
             if this =='F' or this =='f':
-                return 8.5
+                return HOURS_FULLTIME
             elif this=='l' or this=='L':
-                return 3.5
+                return HOURS_LUNCH
             else:
-                return 5.0   
+                return HOURS_HALFDAY   
         @staticmethod
         def round_to(n, precision):
             correction = 0.5 if n >= 0 else -0.5
@@ -241,7 +244,7 @@ class NameStuff(object):
                                       employee_name = NameStuff.pull_name(int(employee_name))
                                       if employee_name not in name_list:
                                               name_list.append(employee_name)
-                                      return;
+                                      return
                                 
                         
                         file.close()
@@ -263,11 +266,13 @@ def Name_body():
         total_tips_slave =""
         new_given = 0.00
         total = 0
-        name_array= []
+        global name_array
+        name_array=[]
         total_hours = 0
         name_list = []
         hours_list = []
         final_list = []
+        eval_worked=[]
         number_of_employees=0
         while a == True:
             try:
@@ -284,7 +289,7 @@ def Name_body():
                             employee_name = NameStuff.pull_name(int(employee_name))
                     if employee_name not in name_list:
                             name_list.append(employee_name)
-                    hours_worked =input("What is the number of hours that the employee has worked f= full day h = half day l = lunch >> ").strip()
+                    hours_worked =input("What is the number of hours that "+employee_name+" has worked f= full day h = half day l = lunch >> ").strip()
                     try:
                         eval_worked = eval(hours_worked)
                     except:
@@ -322,8 +327,7 @@ def Name_body():
                         #print(total_hours)
                     else:
                         print("Error: Please enter a propper value")
-                        continue
-                        
+                        continue     
                         
                         
             except Exception as e:
@@ -359,17 +363,20 @@ def Name_body():
                 print(final_list[y])
         print("/////////////////////Total Tips Recived General/////////////////")
         print(NameStuff.calculate_total_tips(total_tips_slave))
-        endKey = input('Press Any Key To Exit R to restart and C to Clear Lists')
+        endKey = input('Press Any Key To Exit R to restart and C to Clear Lists: ')
         if (endKey=="R" or endKey=="r"):
+                print("Restarted")
+                name_array.clear()
                 Name_body()
         elif (endKey=="c" or endKey=="C"):
               NameStuff.clear_files()
+              print("Lists Cleared")
+              name_array.clear()
               Name_body()
                 
         else:
                 pass
-Name_body()
-        
+Name_body()        
         
 
 
