@@ -90,7 +90,7 @@ class NameStuff(object):
         @staticmethod
         def capital_name(x):
             #This method takes a name with any case and returns the name with a capital for the first letter.
-            my_name = str(x)
+            my_name = str(x).lower()
             result = ""
             letter_list = []
             new_list = []
